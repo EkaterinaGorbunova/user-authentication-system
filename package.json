@@ -2,10 +2,11 @@
   "name": "passportdemo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
+    "dev": "nodemon app.ts",
     "build": "tsc",
-    "start": "nodemon app.ts"
+    "start": "node dist/app.js"    
   },
   "keywords": [],
   "author": "",

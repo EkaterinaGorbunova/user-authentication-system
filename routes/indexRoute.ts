@@ -3,7 +3,9 @@ const router = express.Router();
 import { ensureAuthenticated } from "../middleware/checkAuth";
 
 router.get("/", (req, res) => {
-  res.send("welcome");
+  // Get the base URL from the request headers
+  const baseUrl = `${req.protocol}://${req.get('host')}`
+  res.render('index', { baseUrl });
 });
 
 router.get("/dashboard", ensureAuthenticated, (req, res) => {

@@ -12,19 +12,11 @@ tsc --init
 
 ## Compiling TypeScript to JavaScript
 
-Compile spedific file:
+Compile spedific file - `tsc app.ts`
 
-```Bash
-tsc app.ts
-```
+Compile whole project - `tsc`
 
-Compile whole project:
-
-```Bash
-tsc
-```
-
-`tsconfig.json` file:
+Configure `tsconfig.json` file:
 
 ```Bash
 {
@@ -37,6 +29,22 @@ tsc
 ```
 
 `outDir`: Specifies the output directory for the compiled JavaScript files
+
+## Run Application
+Run application in development mode (with nodemon):
+```Bash
+npm run dev
+```
+Compile TypeScript files into JavaScript, outputting them to the `dist` folder (as defined in `tsconfig.json`).
+
+```Bash
+npm run build
+```
+Start server in production, executing the compiled JavaScript file:
+
+```Bash
+npm run start
+```
 
 ## Configure GitHub strategy
 
