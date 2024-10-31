@@ -46,7 +46,7 @@ function createUser(profile: Profile, email: string): User {
 }
 
 // Function to handle GitHub authentication logic
-/* FIX ME 😭 still need to fix any in done*/
+/* FIX ME 😭*/
 async function handleGitHubAuthentication(req: Request, accessToken: string, refreshToken: string, profile: Profile, done: (error: any, user?: User | null) => void) {
   try {
     const email = await getUserEmail(profile, accessToken);

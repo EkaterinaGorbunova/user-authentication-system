@@ -18,13 +18,13 @@ const localStrategy = new passport_local_1.Strategy({
         });
 });
 /*
-FIX ME (types) still need to fix😭
+FIX ME (types) still need to fix user😭
 */
 passport_1.default.serializeUser(function (user, done) {
     done(null, user.id);
 });
 /*
-FIX ME (types) still need to fix 😭
+FIX ME (types)😭
 */
 passport_1.default.deserializeUser(function (id, done) {
     let user = (0, userController_1.getUserById)(id);

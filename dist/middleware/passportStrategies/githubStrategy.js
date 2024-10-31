@@ -49,7 +49,7 @@ function createUser(profile, email) {
     };
 }
 // Function to handle GitHub authentication logic
-/* FIX ME 😭 still need to fix any in done*/
+/* FIX ME 😭*/
 function handleGitHubAuthentication(req, accessToken, refreshToken, profile, done) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
