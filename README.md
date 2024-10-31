@@ -21,7 +21,7 @@ tsc app.ts
 Compile whole project:
 
 ```Bash
-tsc app.ts
+tsc
 ```
 
 `tsconfig.json` file:
@@ -43,7 +43,7 @@ tsc app.ts
 Create a GitHub Application:
 
 1. Go to https://github.com/settings/applications/new
-2. Fill in the application name, homepage URL (eg. http://127.0.0.1:8000), and authorization callback URL (eg. http://127.0.0.1:8000/auth/github/callback).
+2. Fill in the application name, homepage URL (eg. http://localhost:8000), and authorization callback URL (eg. http://localhost:8000/auth/github/callback).
 3. Click "Create application".
 4. Note down the Client ID and Client Secret provided.
 
@@ -56,7 +56,7 @@ const githubStrategy: GitHubStrategy = new GitHubStrategy(
   {
     clientID: "YOUR_CLIENT_ID",
     clientSecret: "YOUR_CLIENT_SECRET",
-    callbackURL: "http://127.0.0.1:8000/auth/github/callback",
+    callbackURL: "http://localhost:8000/auth/github/callback",
     passReqToCallback: true,
   },
 );
