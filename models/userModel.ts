@@ -1,4 +1,6 @@
-const database = [
+import { User } from './userTypes'
+
+const database: User[] = [
   {
     id: '1',
     name: "Jimmy Smith",
@@ -20,17 +22,19 @@ const database = [
 ];
 
 const userModel = {
+  database, // Expose the database array
 
   /* FIX ME (types) 😭 */
-  findOne: (email: string) => {
+  findOne: (email: string): User | null => {
     const user = database.find((user) => user.email === email);
-    if (user) {
-      return user;
-    }
-    throw new Error(`Couldn't find user with email: ${email}`);
+    // if (user) {
+      return user || null;
+    // }
+    // throw new Error(`Couldn't find user with email: ${email}`);
   },
+
   /* FIX ME (types) 😭 */
-  findById: (id: string) => {
+  findById: (id: string): User => {
     const user = database.find((user) => user.id === id);
     if (user) {
       return user;
@@ -38,5 +42,7 @@ const userModel = {
     throw new Error(`Couldn't find user with id: ${id}`);
   },
 };
+
+
 
 export { database, userModel };

@@ -12,7 +12,8 @@ const flash = require('express-flash');
 const port = process.env.port || 8000;
 const app = (0, express_1.default)();
 app.set("view engine", "ejs");
-app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
+app.set('views', path_1.default.join(__dirname, 'views'));
+app.use('/public', express_1.default.static(path_1.default.join(__dirname, "public")));
 app.use((0, express_session_1.default)({
     secret: "secret",
     resave: false,

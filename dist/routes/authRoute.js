@@ -16,6 +16,14 @@ router.post("/login", passport_1.default.authenticate("local", {
     /* FIX ME: 😭 failureMsg needed when login fails */
     failureFlash: true // Enable failure message storage
 }));
+// GitHub login route (Initiate GitHub login)
+router.get("/github", passport_1.default.authenticate("github", { scope: ["user:email"] }));
+// GitHub callback route (Handle GitHub login callback)
+router.get("/github/callback", passport_1.default.authenticate("github", {
+    successRedirect: "/dashboard",
+    failureRedirect: "/auth/login",
+    failureFlash: true, // Enable failure message storage
+}));
 router.get("/logout", (req, res) => {
     req.logout((err) => {
         if (err)
