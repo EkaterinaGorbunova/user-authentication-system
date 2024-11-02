@@ -2,5 +2,6 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  password?: string; // Optional, since OAuth users won't have passwords
+  password?: string; // optional, since OAuth users won't have passwords
+  role: string; // user or admin
 }

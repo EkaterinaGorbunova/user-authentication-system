@@ -39,9 +39,10 @@ async function getUserEmail(profile: Profile, accessToken: string) {
 function createUser(profile: Profile, email: string): User {
   return {
     id: String(userModel.database.length + 1), // Generate user id
-    name: profile.displayName || profile.username || "Unknown User",
+    name: profile.displayName || profile.username || "Unknown Username",
     email: email,
     password: '', // Password not applicable for GitHub users
+    role: 'user', // All users have the  role: 'user' by default
   };
 }
 

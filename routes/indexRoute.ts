@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { ensureAuthenticated } from "../middleware/checkAuth";
+import { ensureAuthenticated, ensureAdminAuthenticated } from "../middleware/checkAuth";
 
 router.get("/", (req, res) => {
   // Get the base URL from the request headers
@@ -10,6 +10,12 @@ router.get("/", (req, res) => {
 
 router.get("/dashboard", ensureAuthenticated, (req, res) => {
   res.render("dashboard", {
+    user: req.user,
+  });
+});
+
+router.get('/admin', ensureAdminAuthenticated, (req, res) => {
+  res.render('admin', {
     user: req.user,
   });
 });
