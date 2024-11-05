@@ -1,15 +1,22 @@
-import express from "express";
-const router = express.Router();
-import { ensureAuthenticated, ensureAdminAuthenticated } from "../middleware/checkAuth";
+import express from 'express';
+import {
+  ensureAuthenticated,
+  ensureAdminAuthenticated,
+} from '../middleware/checkAuth';
+import { setBaseUrl } from '../middleware/setBaseUrl';
 
-router.get("/", (req, res) => {
-  // Get the base URL from the request headers
-  const baseUrl = `${req.protocol}://${req.get('host')}`
-  res.render('index', { baseUrl });
+const router = express.Router();
+router.use(setBaseUrl);
+
+router.get('/', (req, res) => {
+  res.render('index', {
+    user: req.user,
+    baseUrl: req.baseUrl,
+  });
 });
 
-router.get("/dashboard", ensureAuthenticated, (req, res) => {
-  res.render("dashboard", {
+router.get('/dashboard', ensureAuthenticated, (req, res) => {
+  res.render('dashboard', {
     user: req.user,
   });
 });
@@ -17,6 +24,7 @@ router.get("/dashboard", ensureAuthenticated, (req, res) => {
 router.get('/admin', ensureAdminAuthenticated, (req, res) => {
   res.render('admin', {
     user: req.user,
+    baseUrl: req.baseUrl,
   });
 });
 

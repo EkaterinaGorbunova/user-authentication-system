@@ -1,4 +1,11 @@
 <h1 class="mt-4">Admin Dashboard</h1>
-<p class="lead mb-3">Welcome, <%= user.name %>!</p>
-<p class="lead mb-3">Your role: <%= user.role %></p>
-<a href="/auth/logout" class="btn btn-secondary">Logout</a>
+<p class="lead mb-3">Welcome, <%= user.role==='admin' ? user.role + ' ' + user.name : user.name %>!</p>
+
+<a href="<%= baseUrl %>/dashboard" class="btn btn-primary">
+  Go to Dashboard
+</a>
+
+<a href="/auth/logout" class="btn btn-secondary">
+  <span class="material-icons" style="font-size: 17px; margin-bottom: 3px; vertical-align: middle;">logout</span> 
+  Logout
+</a>
