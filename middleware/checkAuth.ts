@@ -16,7 +16,6 @@ export const ensureAdminAuthenticated = (req: Request, res: Response, next: Next
   // This allows us to access properties like 'role' on req.user without TypeScript errors.
   // If req.user is undefined (e.g., if the user is not authenticated), user will also be undefined.
   const user = req.user as User | undefined;
-  console.log(`'Hello ${user?.role}`)
 
   // Check if the user is authenticated and has the 'admin' role
   if (req.isAuthenticated() && user?.role === 'admin') {

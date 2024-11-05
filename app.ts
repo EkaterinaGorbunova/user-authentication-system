@@ -3,7 +3,7 @@ import expressLayouts from "express-ejs-layouts";
 import session from "express-session";
 import path from "path";
 import passportMiddleware from './middleware/passportMiddleware';
-const flash = require('express-flash');
+import flash from 'express-flash';
 
 const port = process.env.port || 8000;
 
@@ -29,6 +29,7 @@ app.use(flash());
 
 import authRoute from "./routes/authRoute";
 import indexRoute from "./routes/indexRoute";
+import adminRoute from "./routes/adminRoute";
 
 // Middleware for express
 app.use(express.json());
@@ -50,6 +51,7 @@ app.use((req, res, next) => {
 
 app.use("/", indexRoute);
 app.use("/auth", authRoute);
+app.use("/admin", adminRoute);
 
 app.listen(port, () => {
   console.log(`🚀 Server has started on http://localhost:${port}`);
