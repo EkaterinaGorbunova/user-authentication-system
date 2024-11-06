@@ -1,6 +1,6 @@
 
 import { Request, Response, NextFunction } from 'express';
-import { User } from '../models/userTypes'
+// import { User } from '../models/userTypes'
 /*
 FIX ME (types) 😭
 */
@@ -15,7 +15,7 @@ export const ensureAdminAuthenticated = (req: Request, res: Response, next: Next
   // Cast req.user to the User type (or undefined if not set), so TypeScript recognizes it as a User object.
   // This allows us to access properties like 'role' on req.user without TypeScript errors.
   // If req.user is undefined (e.g., if the user is not authenticated), user will also be undefined.
-  const user = req.user as User | undefined;
+  const user = req.user as Express.User | undefined;
 
   // Check if the user is authenticated and has the 'admin' role
   if (req.isAuthenticated() && user?.role === 'admin') {

@@ -1,6 +1,6 @@
-import { User } from './userTypes'
+// import { User } from './userTypes'
 
-const database: User[] = [
+const database: Express.User[] = [
   {
     id: '1',
     name: "Jimmy Smith",
@@ -28,7 +28,7 @@ const userModel = {
   database, // Expose the database array
 
   /* FIX ME (types) 😭 */
-  findOne: (email: string): User | null => {
+  findOne: (email: string): Express.User | null => {
     const user = database.find((user) => user.email === email);
     // if (user) {
       return user || null;
@@ -37,7 +37,7 @@ const userModel = {
   },
 
   /* FIX ME (types) 😭 */
-  findById: (id: string): User | null => {
+  findById: (id: string): Express.User | null => {
     const user = database.find((user) => user.id === id);
     if (user) {
       return user || null;

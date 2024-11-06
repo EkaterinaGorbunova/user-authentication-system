@@ -2,7 +2,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { getUserByEmailIdAndPassword, getUserById} from "../../controllers/userController";
 import { PassportStrategy } from '../../interfaces/index';
-import { User } from "../../models/userTypes";
+// import { User } from "../../models/userTypes";
 
 const localStrategy = new LocalStrategy(
   {
@@ -12,8 +12,8 @@ const localStrategy = new LocalStrategy(
   (email, password, done) => {
     const user = getUserByEmailIdAndPassword(email, password);
     return user
-      ? done(null, user)
-      : done(null, false, {
+      ? done(null, user) // create session and redirect to dashboard
+      : done(null, false, { // do not create session and do not redirect to dashboard
           message: "Your login details are not valid. Please try again",
         });
   }
@@ -22,17 +22,19 @@ const localStrategy = new LocalStrategy(
 /*
 FIX ME (types) still need to fix user😭
 */
-passport.serializeUser(function (user: any, done: (error: any, user?: User | null) => void) {
+// what data store inside the session and create session + create speciak variable req.user
+passport.serializeUser(function (user: Express.User, done: (err: any, id?: string) => void) {
   done(null, user.id);
 });
 
 /*
 FIX ME (types)😭
 */
-passport.deserializeUser(function (id: string, done: (error: any, user?: User | null) => void) {
+// keep user uptudate
+passport.deserializeUser(function (id: string, done: (err: any, user?: Express.User | false | null) => void) {
   let user = getUserById(id);
   if (user) {
-    done(null, user);
+    done(null, user); // refresh data and attach it to req.user 
   } else {
     done({ message: "User not found" }, null);
   }

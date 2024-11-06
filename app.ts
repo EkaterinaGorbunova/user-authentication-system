@@ -5,6 +5,18 @@ import path from "path";
 import passportMiddleware from './middleware/passportMiddleware';
 import flash from 'express-flash';
 
+declare global {
+  namespace Express {
+    interface User {
+      id: string;
+      name: string;
+      email: string;
+      password?:string;
+      role: 'user' | 'admin';
+    }
+  }
+}
+
 const port = process.env.port || 8000;
 
 const app = express();
@@ -27,8 +39,8 @@ app.use(
 );
 app.use(flash());
 
-import authRoute from "./routes/authRoute";
 import indexRoute from "./routes/indexRoute";
+import authRoute from "./routes/authRoute";
 import adminRoute from "./routes/adminRoute";
 
 // Middleware for express

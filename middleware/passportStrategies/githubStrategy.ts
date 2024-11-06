@@ -3,7 +3,7 @@ import { Profile } from 'passport-github2';
 import { PassportStrategy } from '../../interfaces/index';
 import { Request } from 'express';
 import { userModel } from '../../models/userModel';
-import { User } from '../../models/userTypes'
+// import { User } from '../../models/userTypes'
 
 import axios from 'axios';
 import dotenv from 'dotenv';
@@ -36,7 +36,7 @@ async function getUserEmail(profile: Profile, accessToken: string) {
 }
 
 // Function to create a new user object
-function createUser(profile: Profile, email: string): User {
+function createUser(profile: Profile, email: string): Express.User {
   return {
     id: String(userModel.database.length + 1), // Generate user id
     name: profile.displayName || profile.username || "Unknown Username",
@@ -48,7 +48,7 @@ function createUser(profile: Profile, email: string): User {
 
 // Function to handle GitHub authentication logic
 /* FIX ME 😭*/
-async function handleGitHubAuthentication(req: Request, accessToken: string, refreshToken: string, profile: Profile, done: (error: any, user?: User | null) => void) {
+async function handleGitHubAuthentication(req: Request, accessToken: string, refreshToken: string, profile: Profile, done: (error: any, user?: Express.User | null) => void) {
   try {
     const email = await getUserEmail(profile, accessToken);
     
@@ -63,7 +63,7 @@ async function handleGitHubAuthentication(req: Request, accessToken: string, ref
     }
 
     // If user does not exist, create a new user
-    const newUser: User = createUser(profile, email);
+    const newUser: Express.User = createUser(profile, email);
     userModel.database.push(newUser); // Add new user to database
 
     console.log('Updated userModel.database:', userModel.database);

@@ -4,7 +4,7 @@ import {
   ensureAdminAuthenticated,
 } from '../middleware/checkAuth';
 import { setBaseUrl } from '../middleware/setBaseUrl';
-import { User } from '../models/userTypes'
+// import { User } from '../models/userTypes'
 
 const router = express.Router();
 router.use(setBaseUrl);
@@ -31,7 +31,7 @@ router.get('/admin', ensureAdminAuthenticated, (req, res) => {
       sessionId,
       userId: session.passport?.user || null, // Ensure that if no user ID is found, we explicitly set it to null
     };
-  }).filter(session => session.userId !== (req.user as User)?.id); // Exclude the admin session from the list of сurrent active sessions
+  }).filter(session => session.userId !== (req.user as Express.User)?.id); // Exclude the admin session from the list of сurrent active sessions
 
   res.render('admin', {
     user: req.user,
