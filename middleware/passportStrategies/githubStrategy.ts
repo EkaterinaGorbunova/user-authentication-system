@@ -17,19 +17,30 @@ if (!githubClientID || !githubClientSecret) {
   throw new Error('GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET must be defined in the environment variables');
 }
 
-// Function to get user email from GitHub
+// Get the user's email from GitHub profile (https://stackoverflow.com/questions/35373995/github-user-email-is-null-despite-useremail-scope)
 async function getUserEmail(profile: Profile, accessToken: string) {
-  console.log('GitHub profile:', profile)
-  // Check if profile.emails is defined and has at least one email
-  let email = profile.emails && profile.emails.length > 0 ? profile.emails[0].value : null; 
+  // Check if the profile contains any emails. If so, use the first one.
+  // If the profile has no emails, the value of email will be set to null.
+  let email = profile.emails && profile.emails.length > 0 ? profile.emails[0].value : null;
+
+  // If no email is found in the profile, make an API call to GitHub to fetch the user's email
   if (!email) {
+    // Make a GET request to GitHub's /user/emails API endpoint using the access token
     const emailResponse = await axios.get('https://api.github.com/user/emails', {
-      headers: { Authorization: `Bearer ${accessToken}` },
+      headers: { Authorization: `Bearer ${accessToken}` }, // Include the access token in the request headers
     });
+
+    // Find the primary email from the response data (email with primary: true)
     const primaryEmail = emailResponse.data.find((emailObj: { primary: boolean }) => emailObj.primary);
+
+    // If a primary email is found, use it; otherwise, set email to null
     email = primaryEmail?.email || null;
+
+    // Log the fetched email to the console for debugging purposes
     console.log('Fetched email:', email);
   }
+
+  // Return the retrieved or fetched email
   return email;
 }
 
