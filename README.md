@@ -1,3 +1,6 @@
+## User Authentication System with GitHub OAuth
+![login](./public/login-screenshot.png)
+
 ## Run Application
 Run application in development mode (with nodemon):
 ```Bash
@@ -14,4 +17,7 @@ Start server in production, executing the compiled JavaScript file:
 npm run start
 ```
 
-Admin is `jonathan123@gmail.com`
+## Admin Dashboard
+Admin is `jonathan123@gmail.com`:
+
+![login](./public/admin-screenshot.png)
