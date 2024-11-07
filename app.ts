@@ -68,3 +68,5 @@ app.use("/admin", adminRoute);
 app.listen(port, () => {
   console.log(`🚀 Server has started on http://localhost:${port}`);
 });
+
+export default app

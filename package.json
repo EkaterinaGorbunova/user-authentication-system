@@ -7,7 +7,8 @@
     "dev": "nodemon app.ts",
     "build": "tsc",
     "start": "node dist/app.js",
-    "copyfiles": "copyfiles -u 0 views/**/* dist/ && copyfiles -u 0 public/**/* dist/"
+    "copyfiles": "copyfiles -u 0 views/**/* dist/ && copyfiles -u 0 public/**/* dist/",
+    "vercel-build": "echo hello"
   },
   "keywords": [],
   "author": "",
