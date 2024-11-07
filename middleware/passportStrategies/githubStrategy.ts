@@ -22,7 +22,6 @@ async function getUserEmail(profile: Profile, accessToken: string) {
   console.log('GitHub profile:', profile)
   // Check if profile.emails is defined and has at least one email
   let email = profile.emails && profile.emails.length > 0 ? profile.emails[0].value : null; 
-
   if (!email) {
     const emailResponse = await axios.get('https://api.github.com/user/emails', {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -31,7 +30,6 @@ async function getUserEmail(profile: Profile, accessToken: string) {
     email = primaryEmail?.email || null;
     console.log('Fetched email:', email);
   }
-
   return email;
 }
 
@@ -41,12 +39,11 @@ function createUser(profile: Profile, email: string): Express.User {
     id: String(userModel.database.length + 1), // Generate user id
     name: profile.displayName || profile.username || "Unknown Username",
     email: email,
-    password: '', // Password not applicable for GitHub users
+    password: '', // 'password' not applicable for GitHub users
     role: 'user', // All users have the  role: 'user' by default
   };
 }
 
-// Function to handle GitHub authentication logic
 /* FIX ME 😭*/
 async function handleGitHubAuthentication(req: Request, accessToken: string, refreshToken: string, profile: Profile, done: (error: any, user?: Express.User | null) => void) {
   try {
@@ -56,15 +53,15 @@ async function handleGitHubAuthentication(req: Request, accessToken: string, ref
       return done(new Error("No email associated with this account"), null);
     }
 
-    // Check if the user already exists in the database by email
+    // Check if the user already exists in the database 
     const existingUser = userModel.findOne(email);
     if (existingUser) {
       return done(null, existingUser);
     }
 
-    // If user does not exist, create a new user
+    // If user does not exist, create a new user and push it to database array
     const newUser: Express.User = createUser(profile, email);
-    userModel.database.push(newUser); // Add new user to database
+    userModel.database.push(newUser);
 
     console.log('Updated userModel.database:', userModel.database);
     return done(null, newUser);
