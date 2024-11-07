@@ -5,8 +5,9 @@
   "main": "dist/app.js",
   "scripts": {
     "dev": "nodemon app.ts",
-    "build": "tsc && copyfiles -u 0 views/**/* dist/ && copyfiles -u 0 public/**/* dist/",
-    "start": "node dist/app.js"
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "copyfiles": "copyfiles -u 0 views/**/* dist/ && copyfiles -u 0 public/**/* dist/"
   },
   "keywords": [],
   "author": "",

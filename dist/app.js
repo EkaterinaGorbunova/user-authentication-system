@@ -48,7 +48,3 @@ app.use("/admin", adminRoute_1.default);
 app.listen(port, () => {
     console.log(`🚀 Server has started on http://localhost:${port}`);
 });
-// Export a serverless function for Vercel (production)
-exports.default = (req, res) => {
-    app(req, res); // Pass the request and response to the Express app
-};

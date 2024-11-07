@@ -1,4 +1,4 @@
-import express, { Request, Response }  from "express";
+import express from "express";
 import expressLayouts from "express-ejs-layouts";
 import session from "express-session";
 import path from "path";
@@ -68,8 +68,3 @@ app.use("/admin", adminRoute);
 app.listen(port, () => {
   console.log(`🚀 Server has started on http://localhost:${port}`);
 });
-
-// Export a serverless function for Vercel (production)
-export default (req: Request, res: Response) => {
-  app(req, res);  // Pass the request and response to the Express app
-};

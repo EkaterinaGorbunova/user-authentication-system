@@ -13,3 +13,5 @@ Start server in production, executing the compiled JavaScript file:
 ```Bash
 npm run start
 ```
+
+Admin is `jonathan123@gmail.com`
