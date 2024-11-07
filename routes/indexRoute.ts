@@ -9,6 +9,7 @@ const router = express.Router();
 router.use(setBaseUrl);
 
 router.get('/', (req, res) => {
+  console.log('req.baseUrl2:', req.baseUrl)
   res.render('index', {
     user: req.user,
     baseUrl: req.baseUrl,
@@ -31,6 +32,8 @@ router.get('/admin', ensureAdminAuthenticated, (req, res) => {
       userId: session.passport?.user || null, // Ensure that if no user id is found, we explicitly set it to null
     };
   }).filter(session => session.userId !== (req.user as Express.User)?.id); // Exclude the admin session from the list of сurrent active sessions
+
+  console.log('req.baseUrl3:', req.baseUrl)
 
   res.render('admin', {
     user: req.user,
