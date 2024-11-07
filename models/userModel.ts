@@ -46,6 +46,4 @@ const userModel = {
   },
 };
 
-
-
 export { database, userModel };

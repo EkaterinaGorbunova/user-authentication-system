@@ -10,12 +10,20 @@ const localStrategy = new LocalStrategy(
     passwordField: "password",
   },
   (email, password, done) => {
-    const user = getUserByEmailIdAndPassword(email, password);
-    return user
-      ? done(null, user) // create session and redirect to dashboard
-      : done(null, false, { // do not create session and do not redirect to dashboard
-          message: "Your login details are not valid. Please try again",
-        });
+    const result = getUserByEmailIdAndPassword(email, password);
+
+    // If there's an error (wrong email or password), return the corresponding message
+    if (result.error) {
+      return done(null, false, { message: result.error });
+    }
+
+    // If user is found, create the session
+    return done(null, result.user);
+    // return user
+    //   ? done(null, user) // create session and redirect to dashboard
+    //   : done(null, false, { // do not create session and do not redirect to dashboard
+    //       message: "Your login details are not valid. Please try again",
+    //     });
   }
 );
 
