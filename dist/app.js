@@ -25,8 +25,8 @@ app.use((0, express_session_1.default)({
     },
 }));
 app.use((0, express_flash_1.default)());
-const authRoute_1 = __importDefault(require("./routes/authRoute"));
 const indexRoute_1 = __importDefault(require("./routes/indexRoute"));
+const authRoute_1 = __importDefault(require("./routes/authRoute"));
 const adminRoute_1 = __importDefault(require("./routes/adminRoute"));
 // Middleware for express
 app.use(express_1.default.json());

@@ -3,7 +3,6 @@ import { Profile } from 'passport-github2';
 import { PassportStrategy } from '../../interfaces/index';
 import { Request } from 'express';
 import { userModel } from '../../models/userModel';
-// import { User } from '../../models/userTypes'
 
 import axios from 'axios';
 import dotenv from 'dotenv';
@@ -22,29 +21,22 @@ async function getUserEmail(profile: Profile, accessToken: string) {
   // Check if the profile contains any emails. If so, use the first one.
   // If the profile has no emails, the value of email will be set to null.
   let email = profile.emails && profile.emails.length > 0 ? profile.emails[0].value : null;
-
   // If no email is found in the profile, make an API call to GitHub to fetch the user's email
   if (!email) {
     // Make a GET request to GitHub's /user/emails API endpoint using the access token
     const emailResponse = await axios.get('https://api.github.com/user/emails', {
       headers: { Authorization: `Bearer ${accessToken}` }, // Include the access token in the request headers
     });
-
     // Find the primary email from the response data (email with primary: true)
     const primaryEmail = emailResponse.data.find((emailObj: { primary: boolean }) => emailObj.primary);
-
     // If a primary email is found, use it; otherwise, set email to null
     email = primaryEmail?.email || null;
-
     // Log the fetched email to the console for debugging purposes
     console.log('Fetched email:', email);
   }
-
-  // Return the retrieved or fetched email
   return email;
 }
 
-// Function to create a new user object
 function createUser(profile: Profile, email: string): Express.User {
   return {
     id: String(userModel.database.length + 1), // Generate user id
@@ -74,7 +66,6 @@ async function handleGitHubAuthentication(req: Request, accessToken: string, ref
     const newUser: Express.User = createUser(profile, email);
     userModel.database.push(newUser);
 
-    console.log('Updated userModel.database:', userModel.database);
     return done(null, newUser);
   } catch (error) {
     return done(error, null);

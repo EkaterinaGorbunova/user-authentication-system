@@ -10,26 +10,29 @@ const localStrategy = new passport_local_1.Strategy({
     usernameField: "email",
     passwordField: "password",
 }, (email, password, done) => {
-    const user = (0, userController_1.getUserByEmailIdAndPassword)(email, password);
-    return user
-        ? done(null, user)
-        : done(null, false, {
-            message: "Your login details are not valid. Please try again",
-        });
+    const result = (0, userController_1.getUserByEmailIdAndPassword)(email, password);
+    // If there's an error (wrong email or password), return the corresponding message
+    // https://stackoverflow.com/questions/26403853/node-js-authentication-with-passport-how-to-flash-a-message-if-a-field-is-missi
+    if (result.error) {
+        return done(null, false, { message: result.error });
+    }
+    return done(null, result.user);
 });
 /*
 FIX ME (types) still need to fix user😭
 */
+// Decide what data to store in the session; create session and req.user
 passport_1.default.serializeUser(function (user, done) {
     done(null, user.id);
 });
 /*
 FIX ME (types)😭
 */
+// Keep user data up-to-date on each request
 passport_1.default.deserializeUser(function (id, done) {
     let user = (0, userController_1.getUserById)(id);
     if (user) {
-        done(null, user);
+        done(null, user); // refresh data and attach it to req.user 
     }
     else {
         done({ message: "User not found" }, null);

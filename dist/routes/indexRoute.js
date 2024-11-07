@@ -26,7 +26,7 @@ router.get('/admin', checkAuth_1.ensureAdminAuthenticated, (req, res) => {
         const session = JSON.parse(sessionData);
         return {
             sessionId,
-            userId: ((_a = session.passport) === null || _a === void 0 ? void 0 : _a.user) || null, // Ensure that if no user ID is found, we explicitly set it to null
+            userId: ((_a = session.passport) === null || _a === void 0 ? void 0 : _a.user) || null, // Ensure that if no user id is found, we explicitly set it to null
         };
     }).filter(session => { var _a; return session.userId !== ((_a = req.user) === null || _a === void 0 ? void 0 : _a.id); }); // Exclude the admin session from the list of сurrent active sessions
     res.render('admin', {

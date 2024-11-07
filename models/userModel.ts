@@ -1,5 +1,3 @@
-// import { User } from './userTypes'
-
 const database: Express.User[] = [
   {
     id: '1',
@@ -30,10 +28,7 @@ const userModel = {
   /* FIX ME (types) 😭 */
   findOne: (email: string): Express.User | null => {
     const user = database.find((user) => user.email === email);
-    // if (user) {
-      return user || null;
-    // }
-    // throw new Error(`Couldn't find user with email: ${email}`);
+    return user || null;
   },
 
   /* FIX ME (types) 😭 */

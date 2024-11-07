@@ -22,34 +22,37 @@ const githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
 if (!githubClientID || !githubClientSecret) {
     throw new Error('GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET must be defined in the environment variables');
 }
-// Function to get user email from GitHub
+// Get the user's email from GitHub profile (https://stackoverflow.com/questions/35373995/github-user-email-is-null-despite-useremail-scope)
 function getUserEmail(profile, accessToken) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('GitHub profile:', profile);
-        // Check if profile.emails is defined and has at least one email
+        // Check if the profile contains any emails. If so, use the first one.
+        // If the profile has no emails, the value of email will be set to null.
         let email = profile.emails && profile.emails.length > 0 ? profile.emails[0].value : null;
+        // If no email is found in the profile, make an API call to GitHub to fetch the user's email
         if (!email) {
+            // Make a GET request to GitHub's /user/emails API endpoint using the access token
             const emailResponse = yield axios_1.default.get('https://api.github.com/user/emails', {
-                headers: { Authorization: `Bearer ${accessToken}` },
+                headers: { Authorization: `Bearer ${accessToken}` }, // Include the access token in the request headers
             });
+            // Find the primary email from the response data (email with primary: true)
             const primaryEmail = emailResponse.data.find((emailObj) => emailObj.primary);
+            // If a primary email is found, use it; otherwise, set email to null
             email = (primaryEmail === null || primaryEmail === void 0 ? void 0 : primaryEmail.email) || null;
+            // Log the fetched email to the console for debugging purposes
             console.log('Fetched email:', email);
         }
         return email;
     });
 }
-// Function to create a new user object
 function createUser(profile, email) {
     return {
         id: String(userModel_1.userModel.database.length + 1), // Generate user id
         name: profile.displayName || profile.username || "Unknown Username",
         email: email,
-        password: '', // Password not applicable for GitHub users
+        password: '', // 'password' not applicable for GitHub users
         role: 'user', // All users have the  role: 'user' by default
     };
 }
-// Function to handle GitHub authentication logic
 /* FIX ME 😭*/
 function handleGitHubAuthentication(req, accessToken, refreshToken, profile, done) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -58,15 +61,14 @@ function handleGitHubAuthentication(req, accessToken, refreshToken, profile, don
             if (!email) {
                 return done(new Error("No email associated with this account"), null);
             }
-            // Check if the user already exists in the database by email
+            // Check if the user already exists in the database 
             const existingUser = userModel_1.userModel.findOne(email);
             if (existingUser) {
                 return done(null, existingUser);
             }
-            // If user does not exist, create a new user
+            // If user does not exist, create a new user and push it to database array
             const newUser = createUser(profile, email);
-            userModel_1.userModel.database.push(newUser); // Add new user to database
-            console.log('Updated userModel.database:', userModel_1.userModel.database);
+            userModel_1.userModel.database.push(newUser);
             return done(null, newUser);
         }
         catch (error) {

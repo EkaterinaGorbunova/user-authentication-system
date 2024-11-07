@@ -18,10 +18,7 @@ const getUserByEmailIdAndPassword = (email: string, password: string) => {
 
 const getUserById = (id:string) => {
   let user = userModel.findById(id);
-  if (user) {
-    return user;
-  }
-  return null;
+  return user ? user : null;
 };
 
 function isUserValid(user: Express.User, password: string) {

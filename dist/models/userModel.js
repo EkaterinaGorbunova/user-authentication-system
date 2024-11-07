@@ -30,10 +30,7 @@ const userModel = {
     /* FIX ME (types) 😭 */
     findOne: (email) => {
         const user = database.find((user) => user.email === email);
-        // if (user) {
         return user || null;
-        // }
-        // throw new Error(`Couldn't find user with email: ${email}`);
     },
     /* FIX ME (types) 😭 */
     findById: (id) => {

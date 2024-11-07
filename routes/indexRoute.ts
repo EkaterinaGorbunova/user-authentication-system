@@ -4,7 +4,6 @@ import {
   ensureAdminAuthenticated,
 } from '../middleware/checkAuth';
 import { setBaseUrl } from '../middleware/setBaseUrl';
-// import { User } from '../models/userTypes'
 
 const router = express.Router();
 router.use(setBaseUrl);
@@ -29,7 +28,7 @@ router.get('/admin', ensureAdminAuthenticated, (req, res) => {
     const session = JSON.parse(sessionData as string);
     return {
       sessionId,
-      userId: session.passport?.user || null, // Ensure that if no user ID is found, we explicitly set it to null
+      userId: session.passport?.user || null, // Ensure that if no user id is found, we explicitly set it to null
     };
   }).filter(session => session.userId !== (req.user as Express.User)?.id); // Exclude the admin session from the list of сurrent active sessions
 
