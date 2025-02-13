@@ -17,10 +17,17 @@ const userModel_1 = require("../../models/userModel");
 const axios_1 = __importDefault(require("axios"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const githubClientID = process.env.GITHUB_CLIENT_ID;
-const githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
+const isProduction = process.env.NODE_ENV === 'production';
+const githubClientID = isProduction ? process.env.PROD_GITHUB_CLIENT_ID : process.env.LOCAL_GITHUB_CLIENT_ID;
+const githubClientSecret = isProduction ? process.env.PROD_GITHUB_CLIENT_SECRET : process.env.LOCAL_GITHUB_CLIENT_SECRET;
 if (!githubClientID || !githubClientSecret) {
     throw new Error('GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET must be defined in the environment variables');
+}
+const callbackURL = isProduction
+    ? process.env.PROD_GITHUB_CALLBACK_URL
+    : process.env.LOCAL_GITHUB_CALLBACK_URL || "https://user-authentication-sys.vercel.app/auth/github/callback/";
+if (!callbackURL) {
+    throw new Error('GITHUB_CALLBACK_URL must be defined in the environment variables');
 }
 // Get the user's email from GitHub profile (https://stackoverflow.com/questions/35373995/github-user-email-is-null-despite-useremail-scope)
 function getUserEmail(profile, accessToken) {
@@ -79,7 +86,7 @@ function handleGitHubAuthentication(req, accessToken, refreshToken, profile, don
 const githubStrategy = new passport_github2_1.Strategy({
     clientID: githubClientID,
     clientSecret: githubClientSecret,
-    callbackURL: "http://localhost:8000/auth/github/callback",
+    callbackURL: callbackURL,
     passReqToCallback: true,
 }, handleGitHubAuthentication);
 const passportGitHubStrategy = {
