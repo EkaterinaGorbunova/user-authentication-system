@@ -2,9 +2,16 @@
 <p class="lead mb-3">Welcome, <%= user.role === 'admin' ? user.role + ' ' + user.name : user.name %>!</p>
 
 <% if (user.role === 'admin') { %>
+  <p class="lead mb-3">You have <span style="font-weight: 600"><%= user.role %></span> permissions, so you have access to the Admin Dashboard.</p>
   <a href="/admin" class="btn btn-primary">Admin Dashboard</a>
+<% } else { %>
+  <p class="lead mb-3">You do not have admin permissions to access the admin dashboard.</p>
 <% } %>
 
 <a href="/auth/logout" class="btn btn-secondary">
   <span class="material-icons" style="font-size: 17px; margin-bottom: 3px; vertical-align: middle;">logout</span> Logout
+</a>
+
+<a href="/" class="btn btn-secondary">
+  <span class="material-icons" style="font-size: 17px; margin-bottom: 3px; vertical-align: middle;">home</span> Home
 </a>

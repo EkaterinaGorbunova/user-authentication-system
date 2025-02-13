@@ -1,15 +1,68 @@
-<div class="d-flex align-items-center justify-content-center vh-100">
+<div class="d-flex-col align-items-center justify-content-center vh-100 mt-4 mb-4">
   <div class="card text-center p-4" style="width: 400px;">
     <% if (user) { %>
       <h1 class="mb-4">Welcome, <%= user.name %>!</h1>
       <a href="<%= baseUrl %>/dashboard" class="btn btn-primary btn-block">
-        Go to Dashboard
+        Dashboard
       </a>
     <% } else { %>
-      <p>Please click the button below to log in to your account.</p>
       <a href="<%= baseUrl %>/auth/login" class="btn btn-primary btn-block">
-        Go to Login
+        Login
       </a>
     <% } %>
+  </div>
+
+  <div class="mt-4">
+    <section>
+      <h2>About This App</h2>
+      <p>This is a user authentication system built with Node.js, Express, and Passport.js. It allows users to log in using their GitHub account or predefined user credentials.</p>
+    </section>
+
+    <section>
+      <h2>How to Use</h2>
+      <ol>
+        <li>If you are not logged in, click the "Login" button to log in with your GitHub account or predefined user credentials.</li>
+        <li>Once logged in, you will be redirected to the dashboard where you can access your account details.</li>
+        <li>If you are already logged in, click the "Dashboard" button to access your account details.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Predefined Users</h3>
+      <p>The following predefined users are available for testing:</p>
+      <ul>
+        <li>Jimmy Smith (User) - Email: jimmy123@gmail.com, Password: jimmy123!</li>
+        <li>Johnny Doe (User) - Email: johnny123@gmail.com, Password: johnny123!</li>
+        <li>Jonathan Chen (Admin) - Email: jonathan123@gmail.com, Password: jonathan123!</li>
+      </ul>
+      <p>To access admin capabilities, log in with the admin user credentials.</p>
+    </section>
+
+    <section>
+      <h3>Features</h3>
+      <ul>
+        <li>Secure authentication using GitHub OAuth.</li>
+        <li>Session management with Express sessions.</li>
+        <li>Flash messages for user feedback.</li>
+        <li>
+          Admin Features
+          <ul>
+            <li>View and manage all user sessions.</li>
+            <li>Invoke or terminate user sessions.</li>
+            <li>Access detailed user activity logs.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Technologies Used</h3>
+      <ul>
+        <li>Node.js</li>
+        <li>Express.js</li>
+        <li>Passport.js</li>
+        <li>EJS (Embedded JavaScript templates)</li>
+      </ul>
+    </section>
   </div>
 </div>

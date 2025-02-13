@@ -1,34 +1,49 @@
 <h1 class="mt-4">Admin Dashboard</h1>
 <p class="lead mb-3">Welcome, <%= user.role==='admin' ? user.role + ' ' + user.name : user.name %>!</p>
 
+<p class="lead mb-3">As an admin, you have access to additional features:</p>
+<ul class="lead mb-3">
+  <li>View and manage all user sessions.</li>
+  <li>Invoke or terminate user sessions.</li>
+  <li>Access detailed user activity logs.</li>
+</ul>
+
 <a href="<%= baseUrl %>/dashboard" class="btn btn-primary">
-  Go to Dashboard
+  Dashboard
 </a>
 
 <a href="/auth/logout" class="btn btn-secondary">
-  <span class="material-icons" style="font-size: 17px; margin-bottom: 3px; vertical-align: middle;">logout</span> 
+  <span class="material-icons" style="font-size: 17px; margin-bottom: 3px; vertical-align: middle;">logout</span>
   Logout
+</a>
+
+<a href="/" class="btn btn-secondary">
+  <span class="material-icons" style="font-size: 17px; margin-bottom: 3px; vertical-align: middle;">home</span> Home
 </a>
 
 <h3 class="mt-4">Current Active Sessions</h3>
 
 <ul class="list-group mt-3">
-  <% let hasActiveSessions = false; %>
-  
-  <% if (sessions && sessions.length > 0) { %>
-    <% sessions.forEach(session => { %>
-      <% if (session.userId) { %> <!-- if !session.userId, user has not logged in yet, so we don't want destroy this session -->
-        <li class="list-group-item">
-          <strong>Session ID:</strong> <%= session.sessionId %><br>
-          <strong>User ID:</strong> <%= session.userId %><br>
-          <a href="/admin/sessions/<%= session.sessionId %>/destroy" class="mt-2 badge badge-pill badge-primary">Invoke Session</a>
-        </li>
-        <% hasActiveSessions = true; %>
-      <% } %>
-    <% }) %>
-  <% } %>
+  <% let hasActiveSessions=false; %>
 
-  <% if (!hasActiveSessions) { %>
-    <li class="list-group-item">No active user sessions found.</li>
-  <% } %>
+    <% if (sessions && sessions.length> 0) { %>
+      <% sessions.forEach(session=> { %>
+        <% if (session.userId) { %>
+          <!-- if !session.userId, user has not logged in yet, so we don't want destroy this session -->
+          <li class="list-group-item">
+            <strong>Session ID:</strong>
+            <%= session.sessionId %><br>
+              <strong>User ID:</strong>
+              <%= session.userId %><br>
+                <a href="/admin/sessions/<%= session.sessionId %>/destroy"
+                  class="mt-2 badge badge-pill badge-primary">Invoke Session</a>
+          </li>
+          <% hasActiveSessions=true; %>
+            <% } %>
+              <% }) %>
+                <% } %>
+
+                  <% if (!hasActiveSessions) { %>
+                    <li class="list-group-item">No active user sessions found.</li>
+                    <% } %>
 </ul>
