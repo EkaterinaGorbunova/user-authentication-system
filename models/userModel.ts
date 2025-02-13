@@ -20,6 +20,13 @@ const database: Express.User[] = [
     password: "jonathan123!",
     role: 'admin'
   },
+  {
+    id: '4',
+    name: "Kate",
+    email: "ekaterina.nalitova@gmail.com",
+    password: "kate!",
+    role: 'admin'
+  },
 ];
 
 const userModel = {
