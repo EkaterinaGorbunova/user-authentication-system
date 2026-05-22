@@ -7,7 +7,7 @@ import { userModel } from '../../models/userModel';
 import axios from 'axios';
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({ path: '.env.local' });
 
 const isProduction = process.env.NODE_ENV === 'production';
 
