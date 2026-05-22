@@ -1,68 +1,136 @@
-<div class="d-flex-col align-items-center justify-content-center vh-100 mt-4 mb-4">
-  <div class="card text-center p-4" style="width: 400px;">
+<!-- Hero -->
+<div class="row justify-content-center text-center pt-5 pb-4">
+  <div class="col-lg-8">
+    <div class="mb-3">
+      <span class="badge-neon">
+        <i class="fa-solid fa-shield-halved me-1"></i> Secure by default
+      </span>
+    </div>
+    <h1 class="display-5 fw-bold mb-3">
+      <span class="gradient-text">Node.js Auth System</span>
+    </h1>
+    <p style="color: var(--text-muted-custom); font-size: 1.05rem; max-width: 520px; margin: 0 auto 2rem;">
+      A production-ready authentication system with local credentials, GitHub OAuth, session management, and role-based access control.
+    </p>
+
     <% if (user) { %>
-      <h1 class="mb-4">Welcome, <%= user.name %>!</h1>
-      <a href="<%= baseUrl %>/dashboard" class="btn btn-primary btn-block">
-        Dashboard
-      </a>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a href="<%= baseUrl %>/dashboard" class="btn-neon d-inline-flex align-items-center gap-2">
+          <span><i class="fa-solid fa-gauge-high"></i> Go to Dashboard</span>
+        </a>
+      </div>
     <% } else { %>
-      <a href="<%= baseUrl %>/auth/login" class="btn btn-primary btn-block">
-        Login
-      </a>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a href="<%= baseUrl %>/auth/login" class="btn-neon d-inline-flex align-items-center gap-2">
+          <span><i class="fa-solid fa-right-to-bracket"></i> Sign In</span>
+        </a>
+        <a href="/auth/github" class="btn-github d-inline-flex align-items-center gap-2 text-decoration-none">
+          <i class="fa-brands fa-github fs-5"></i> GitHub OAuth
+        </a>
+      </div>
     <% } %>
   </div>
+</div>
 
-  <div class="mt-4">
-    <section>
-      <h2>About This App</h2>
-      <p>This is a user authentication system built with Node.js, Express, and Passport.js. It allows users to log in using their GitHub account or predefined user credentials.</p>
-    </section>
-
-    <section>
-      <h2>How to Use</h2>
-      <ol>
-        <li>If you are not logged in, click the "Login" button to log in with your GitHub account or predefined user credentials.</li>
-        <li>Once logged in, you will be redirected to the dashboard where you can access your account details.</li>
-        <li>If you are already logged in, click the "Dashboard" button to access your account details.</li>
-      </ol>
-    </section>
-
-    <section>
-      <h3>Predefined Users</h3>
-      <p>The following predefined users are available for testing:</p>
-      <ul>
-        <li>Jimmy Smith (User) - Email: jimmy123@gmail.com, Password: jimmy123!</li>
-        <li>Johnny Doe (User) - Email: johnny123@gmail.com, Password: johnny123!</li>
-        <li>Jonathan Chen (Admin) - Email: jonathan123@gmail.com, Password: jonathan123!</li>
-      </ul>
-      <p>To access admin capabilities, log in with the admin user credentials.</p>
-    </section>
-
-    <section>
-      <h3>Features</h3>
-      <ul>
-        <li>Secure authentication using GitHub OAuth.</li>
-        <li>Session management with Express sessions.</li>
-        <li>Flash messages for user feedback.</li>
-        <li>
-          Admin Features
-          <ul>
-            <li>View and manage all user sessions.</li>
-            <li>Invoke or terminate user sessions.</li>
-            <li>Access detailed user activity logs.</li>
-          </ul>
-        </li>
-      </ul>
-    </section>
-
-    <section>
-      <h3>Technologies Used</h3>
-      <ul>
-        <li>Node.js</li>
-        <li>Express.js</li>
-        <li>Passport.js</li>
-        <li>EJS (Embedded JavaScript templates)</li>
-      </ul>
-    </section>
+<!-- Feature cards -->
+<div class="row g-3 pb-5">
+  <div class="col-md-6 col-lg-3">
+    <div class="glass-card p-4 h-100">
+      <div class="feature-icon feature-icon-cyan mb-3">
+        <i class="fa-solid fa-key"></i>
+      </div>
+      <h6 class="fw-semibold mb-2" style="color: #e2e8f0;">Local Auth</h6>
+      <p style="color: var(--text-muted-custom); font-size: 0.85rem; margin: 0;">
+        Email & password login with Passport.js local strategy and bcrypt hashing.
+      </p>
+    </div>
   </div>
+
+  <div class="col-md-6 col-lg-3">
+    <div class="glass-card p-4 h-100">
+      <div class="feature-icon feature-icon-purple mb-3">
+        <i class="fa-brands fa-github"></i>
+      </div>
+      <h6 class="fw-semibold mb-2" style="color: #e2e8f0;">GitHub OAuth</h6>
+      <p style="color: var(--text-muted-custom); font-size: 0.85rem; margin: 0;">
+        One-click sign-in with GitHub using OAuth 2.0 via Passport.js.
+      </p>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-lg-3">
+    <div class="glass-card p-4 h-100">
+      <div class="feature-icon feature-icon-pink mb-3">
+        <i class="fa-solid fa-users-gear"></i>
+      </div>
+      <h6 class="fw-semibold mb-2" style="color: #e2e8f0;">Role-Based Access</h6>
+      <p style="color: var(--text-muted-custom); font-size: 0.85rem; margin: 0;">
+        User and admin roles with protected routes and middleware-level authorization.
+      </p>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-lg-3">
+    <div class="glass-card p-4 h-100">
+      <div class="feature-icon feature-icon-green mb-3">
+        <i class="fa-solid fa-layer-group"></i>
+      </div>
+      <h6 class="fw-semibold mb-2" style="color: #e2e8f0;">Session Control</h6>
+      <p style="color: var(--text-muted-custom); font-size: 0.85rem; margin: 0;">
+        Express sessions with admin ability to view and terminate active user sessions.
+      </p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-neon" />
+
+<!-- Tech stack + demo credentials -->
+<div class="row g-4 pb-5">
+
+  <div class="col-md-6">
+    <div class="glass-card p-4 h-100">
+      <h6 class="fw-semibold mb-3" style="color: #e2e8f0;">
+        <i class="fa-solid fa-cubes me-2" style="color: var(--neon-cyan);"></i> Tech Stack
+      </h6>
+      <div class="d-flex flex-wrap gap-2">
+        <span class="badge-neon">Node.js</span>
+        <span class="badge-neon">Express</span>
+        <span class="badge-neon">TypeScript</span>
+        <span class="badge-neon">Passport.js</span>
+        <span class="badge-neon-purple">EJS</span>
+        <span class="badge-neon-purple">GitHub OAuth</span>
+        <span class="badge-neon-purple">Express Sessions</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="glass-card p-4 h-100">
+      <h6 class="fw-semibold mb-3" style="color: #e2e8f0;">
+        <i class="fa-solid fa-flask-vial me-2" style="color: var(--neon-purple);"></i> Demo Credentials
+      </h6>
+      <div class="d-flex flex-column gap-2" style="font-size: 0.85rem;">
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge-neon">user</span>
+          <span style="color: var(--text-muted-custom);">jimmy123@gmail.com</span>
+          <span style="color: #4a5568;">/</span>
+          <span style="color: #cdd6f4; font-family: monospace;">jimmy123!</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge-neon">user</span>
+          <span style="color: var(--text-muted-custom);">johnny123@gmail.com</span>
+          <span style="color: #4a5568;">/</span>
+          <span style="color: #cdd6f4; font-family: monospace;">johnny123!</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge-neon-purple">admin</span>
+          <span style="color: var(--text-muted-custom);">jonathan123@gmail.com</span>
+          <span style="color: #4a5568;">/</span>
+          <span style="color: #cdd6f4; font-family: monospace;">jonathan123!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

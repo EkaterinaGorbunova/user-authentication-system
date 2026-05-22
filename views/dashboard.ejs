@@ -1,17 +1,86 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome, <%= user.role === 'admin' ? user.role + ' ' + user.name : user.name %>!</p>
+<!-- Header -->
+<div class="d-flex align-items-center justify-content-between mb-4 pt-2">
+  <div>
+    <h1 class="fs-4 fw-bold gradient-text mb-1">Dashboard</h1>
+    <p style="color: var(--text-muted-custom); font-size: 0.9rem; margin: 0;">
+      <span class="glow-dot me-2"></span> Session active
+    </p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="/" class="btn-glass d-inline-flex align-items-center gap-2 text-decoration-none">
+      <i class="fa-solid fa-house" style="font-size: 0.85rem;"></i> Home
+    </a>
+    <a href="/auth/logout" class="btn-glass d-inline-flex align-items-center gap-2 text-decoration-none" style="color: #ff4d6d; border-color: rgba(255,77,109,0.3);">
+      <i class="fa-solid fa-right-from-bracket" style="font-size: 0.85rem;"></i> Logout
+    </a>
+  </div>
+</div>
 
+<!-- User info card -->
+<div class="glass-card p-4 mb-4">
+  <div class="d-flex align-items-center gap-4">
+    <div style="
+      width: 64px; height: 64px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    ">
+      <%= user.name.charAt(0).toUpperCase() %>
+    </div>
+    <div>
+      <h2 class="fs-5 fw-bold mb-1" style="color: #e2e8f0;">
+        Welcome, <%= user.name %>!
+      </h2>
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <span style="color: var(--text-muted-custom); font-size: 0.85rem;">
+          <i class="fa-solid fa-envelope me-1"></i><%= user.email %>
+        </span>
+        <% if (user.role === 'admin') { %>
+          <span class="badge-neon-purple"><i class="fa-solid fa-crown me-1"></i>Admin</span>
+        <% } else { %>
+          <span class="badge-neon"><i class="fa-solid fa-user me-1"></i>User</span>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Role-based content -->
 <% if (user.role === 'admin') { %>
-  <p class="lead mb-3">You have <span style="font-weight: 600"><%= user.role %></span> permissions, so you have access to the Admin Dashboard.</p>
-  <a href="/admin" class="btn btn-primary">Admin Dashboard</a>
+  <div class="glass-card p-4 mb-3" style="border-color: rgba(123,47,255,0.4); box-shadow: 0 0 20px rgba(123,47,255,0.08);">
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <div class="feature-icon feature-icon-purple">
+        <i class="fa-solid fa-crown"></i>
+      </div>
+      <div>
+        <h6 class="fw-semibold mb-0" style="color: #e2e8f0;">Admin Access</h6>
+        <p style="color: var(--text-muted-custom); font-size: 0.82rem; margin: 0;">
+          You have elevated permissions
+        </p>
+      </div>
+    </div>
+    <p style="color: var(--text-muted-custom); font-size: 0.875rem; margin-bottom: 1rem;">
+      As an admin you can view all active sessions, manage users, and access the admin dashboard.
+    </p>
+    <a href="/admin" class="btn-neon d-inline-flex align-items-center gap-2 text-decoration-none">
+      <span><i class="fa-solid fa-shield-halved"></i> Open Admin Dashboard</span>
+    </a>
+  </div>
 <% } else { %>
-  <p class="lead mb-3">You do not have admin permissions to access the admin dashboard.</p>
+  <div class="glass-card p-4 mb-3">
+    <div class="d-flex align-items-center gap-3 mb-2">
+      <div class="feature-icon feature-icon-cyan">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <div>
+        <h6 class="fw-semibold mb-0" style="color: #e2e8f0;">You're signed in</h6>
+        <p style="color: var(--text-muted-custom); font-size: 0.82rem; margin: 0;">Standard user account</p>
+      </div>
+    </div>
+    <p style="color: var(--text-muted-custom); font-size: 0.875rem; margin: 0;">
+      Your session is active and secure. You do not have admin-level permissions.
+    </p>
+  </div>
 <% } %>
-
-<a href="/auth/logout" class="btn btn-secondary">
-  <span class="material-icons" style="font-size: 17px; margin-bottom: 3px; vertical-align: middle;">logout</span> Logout
-</a>
-
-<a href="/" class="btn btn-secondary">
-  <span class="material-icons" style="font-size: 17px; margin-bottom: 3px; vertical-align: middle;">home</span> Home
-</a>
