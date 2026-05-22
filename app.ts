@@ -2,6 +2,7 @@ import express from "express";
 import expressLayouts from "express-ejs-layouts";
 import session from "express-session";
 import path from "path";
+import helmet from "helmet";
 import passportMiddleware from './middleware/passportMiddleware';
 import flash from 'express-flash';
 
@@ -21,13 +22,15 @@ const port = process.env.port || 8000;
 
 const app = express();
 
+app.use(helmet());
+
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
 
 app.use('/public', express.static(path.join(__dirname, "public")));
 app.use(
   session({
-    secret: "secret",
+    secret: process.env.SESSION_SECRET || "fallback-secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -48,18 +51,6 @@ app.use(express.json());
 app.use(expressLayouts);
 app.use(express.urlencoded({ extended: true }));
 passportMiddleware(app);
-
-app.use((req, res, next) => {
-  console.log(`User details are: `);
-  console.log(req.user);
-
-  console.log("Entire session object:");
-  console.log(req.session);
-
-  console.log(`Session details are: `);
-  console.log((req.session as any).passport);
-  next();
-});
 
 app.use("/", indexRoute);
 app.use("/auth", authRoute);
