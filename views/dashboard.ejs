@@ -2,7 +2,7 @@
 <div class="d-flex align-items-center justify-content-between mb-4 pt-2">
   <div>
     <h1 class="fs-4 fw-bold gradient-text mb-1">Dashboard</h1>
-    <p style="color: var(--text-muted-custom); font-size: 0.9rem; margin: 0;">
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">
       <span class="glow-dot me-2"></span> Session active
     </p>
   </div>
@@ -10,7 +10,7 @@
     <a href="/" class="btn-glass d-inline-flex align-items-center gap-2 text-decoration-none">
       <i class="fa-solid fa-house" style="font-size: 0.85rem;"></i> Home
     </a>
-    <a href="/auth/logout" class="btn-glass d-inline-flex align-items-center gap-2 text-decoration-none" style="color: #ff4d6d; border-color: rgba(255,77,109,0.3);">
+    <a href="/auth/logout" class="btn-glass d-inline-flex align-items-center gap-2 text-decoration-none" style="color: #dc2626; border-color: #fecaca;">
       <i class="fa-solid fa-right-from-bracket" style="font-size: 0.85rem;"></i> Logout
     </a>
   </div>
@@ -22,7 +22,7 @@
     <div style="
       width: 64px; height: 64px;
       border-radius: 16px;
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      background: linear-gradient(135deg, var(--indigo), var(--indigo-light));
       display: flex; align-items: center; justify-content: center;
       font-size: 1.6rem; font-weight: 700; color: #fff;
       flex-shrink: 0;
@@ -30,11 +30,11 @@
       <%= user.name.charAt(0).toUpperCase() %>
     </div>
     <div>
-      <h2 class="fs-5 fw-bold mb-1" style="color: #e2e8f0;">
+      <h2 class="fs-5 fw-bold mb-1" style="color: #0f172a;">
         Welcome, <%= user.name %>!
       </h2>
       <div class="d-flex align-items-center gap-2 flex-wrap">
-        <span style="color: var(--text-muted-custom); font-size: 0.85rem;">
+        <span style="color: var(--text-muted); font-size: 0.85rem;">
           <i class="fa-solid fa-envelope me-1"></i><%= user.email %>
         </span>
         <% if (user.role === 'admin') { %>
@@ -49,19 +49,19 @@
 
 <!-- Role-based content -->
 <% if (user.role === 'admin') { %>
-  <div class="glass-card p-4 mb-3" style="border-color: rgba(123,47,255,0.4); box-shadow: 0 0 20px rgba(123,47,255,0.08);">
+  <div class="glass-card p-4 mb-3" style="border-color: #ddd6fe; box-shadow: 0 2px 8px rgba(79,70,229,0.06);">
     <div class="d-flex align-items-center gap-3 mb-3">
       <div class="feature-icon feature-icon-purple">
         <i class="fa-solid fa-crown"></i>
       </div>
       <div>
-        <h6 class="fw-semibold mb-0" style="color: #e2e8f0;">Admin Access</h6>
-        <p style="color: var(--text-muted-custom); font-size: 0.82rem; margin: 0;">
+        <h6 class="fw-semibold mb-0" style="color: #0f172a;">Admin Access</h6>
+        <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0;">
           You have elevated permissions
         </p>
       </div>
     </div>
-    <p style="color: var(--text-muted-custom); font-size: 0.875rem; margin-bottom: 1rem;">
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
       As an admin you can view all active sessions, manage users, and access the admin dashboard.
     </p>
     <a href="/admin" class="btn-neon d-inline-flex align-items-center gap-2 text-decoration-none">
@@ -75,11 +75,11 @@
         <i class="fa-solid fa-circle-check"></i>
       </div>
       <div>
-        <h6 class="fw-semibold mb-0" style="color: #e2e8f0;">You're signed in</h6>
-        <p style="color: var(--text-muted-custom); font-size: 0.82rem; margin: 0;">Standard user account</p>
+        <h6 class="fw-semibold mb-0" style="color: #0f172a;">You're signed in</h6>
+        <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0;">Standard user account</p>
       </div>
     </div>
-    <p style="color: var(--text-muted-custom); font-size: 0.875rem; margin: 0;">
+    <p style="color: var(--text-muted); font-size: 0.875rem; margin: 0;">
       Your session is active and secure. You do not have admin-level permissions.
     </p>
   </div>
