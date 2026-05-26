@@ -318,6 +318,44 @@
         z-index: 9999;
         transition: opacity 0.3s;
       }
+      .tech-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+      }
+
+      @media (min-width: 333px) {
+        .tech-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .tech-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      .tech-grid > div {
+        background: #f8fafc;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        padding: 8px 10px;
+      }
+
+      .tech-desc {
+        font-size: 0.72rem;
+        color: var(--text-subtle);
+        margin: 4px 0 0;
+      }
+
+      .cred-inset {
+        background: #f8fafc;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        padding: 8px 10px;
+      }
+
       @media (max-width: 576px) {
         .cred-text {
           font-size: 0.75rem;
